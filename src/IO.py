@@ -1,4 +1,5 @@
 import collections
+from sklearn.external import joblib
 
 def read_csv(file_path, has_header=True, verbose=True):
     '''Reads a csv file with all fields numerical (float).'''
@@ -28,3 +29,11 @@ def write_csv(file_path, data, header=None, verbose=True):
                 f.write(','.join(map(str,line)) + '\n')
         else:
             f.write('\n'.join(map(str, data)))
+
+def save_model(model, file_path):
+    '''Saves a model to the disk using joblib.'''
+    joblib.dump(model, file_path)
+
+def load_model(file_path):
+    '''Loads a model that was saved with joblib.'''
+    return joblib.load(file_path)
